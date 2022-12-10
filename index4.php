@@ -29,12 +29,61 @@ Database::getConnection()->query("SET NAMES 'utf8'");
 <br>
 <br>
 <?php
-echo "Wyślij plik muzyczny";
+echo "Wyślij plik muzyczny ";
 echo '<a href="upload_file.php"><i class="glyphicon glyphicon-cloud-upload fa-6x"></i> </a><br><br>';
 
+echo "Stwórz playliste ";
+echo '<a href=""><i class="glyphicon glyphicon-plus glyphicon-lg"></i> </a><br><br>';
 
+echo "<p>Wybierz utwór do odtworzenia:</p>";
+$songs = mysqli_fetch_all(Database::getConnection()->query("SELECT * FROM song"));
 
+echo '<table style="border: 1px solid #000000; border-collapse: collapse; width: 100%;">';
+echo '<thead>';
+echo '<tr>';
+echo '<th style="border: 1px solid #cccccc; padding: 40px;">Odtwórz</th>';
+echo '<th style="border: 1px solid #cccccc; padding: 8px;">Tytuł</th>';
+echo '<th style="border: 1px solid #cccccc; padding: 8px;">Autor</th>';
+echo '<th style="border: 1px solid #cccccc; padding: 8px;">Data dodania</th>';
+echo '<th style="border: 1px solid #cccccc; padding: 8px;">Użytkownik</th>';
+echo '<th style="border: 1px solid #cccccc; padding: 8px;">Tekst piosenki</th>';
+echo '<th style="border: 1px solid #cccccc; padding: 8px;">Gatunek muzyczny</th>';
+echo '</tr>';
+echo '</thead>';
+echo '<tbody>';
+foreach ($songs as $song) {
+    echo '<tr>';
+    echo '<td style="border: 1px solid #cccccc; padding: 8px;">';
+    echo '<audio controls style="width: 100%">';
+    echo '<source src="songs/' . $song[5] . '" type="audio/mpeg">';
+    echo 'Twoja przeglądarka nie obsługuje odtwarzacza audio.';
+    echo '</audio>';
 
+    echo '</td>';
+    echo '<td style="border: 1px solid #cccccc; padding: 8px;">' . $song[1] . '</td>';
+    echo '<td style="border: 1px solid #cccccc; padding: 8px;">' . $song[2] . '</td>';
+    echo '<td style="border: 1px solid #cccccc; padding: 8px;">' . $song[3] . '</td>';
+    echo '<td style="border: 1px solid #cccccc; padding: 8px;">' . mysqli_fetch_array(Database::getConnection()->query("SELECT * FROM user WHERE idu='$song[4]'"))[1] . '</td>';
+    echo '<td style="border: 1px solid #cccccc; padding: 8px;">';
+    echo '<details>';
+    echo '<summary>Kliknij tutaj, aby rozwinąć tekst piosenki</summary>';
+    echo '<br>';
+
+    $lines = explode("\n", $song[6]);
+
+    foreach ($lines as $line) {
+        echo "<p>$line</p>";
+    }
+
+    echo '</details>';
+
+    echo '</td>';
+    echo '<td style="border: 1px solid #cccccc; padding: 8px;">' . mysqli_fetch_array(Database::getConnection()->query("SELECT * FROM musictype WHERE idmt='$song[7]'"))[1] . '</td>';
+    echo '</tr>';
+
+}
+echo '</tbody>';
+echo '</table>';
 ?>
 </BODY>
 </HTML>
