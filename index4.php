@@ -103,7 +103,7 @@ echo '<tbody>';
 foreach ($playlists as $playlist) {
     echo '<tr>';
     echo '<td style="border: 1px solid #cccccc; padding: 8px;"> <a href="playlist_view.php?pl='. $playlist[0] . '">' . $playlist[2] . '</td>';
-    echo '<td style="border: 1px solid #cccccc; padding: 8px;">' . mysqli_fetch_array(Database::getConnection()->query("SELECT * FROM user WHERE idu='$uid'"))[1] . '</td>';
+    echo '<td style="border: 1px solid #cccccc; padding: 8px;">' . mysqli_fetch_array(Database::getConnection()->query("SELECT * FROM user WHERE idu='$playlist[1]'"))[1] . '</td>';
     echo '<td style="border: 1px solid #cccccc; padding: 8px;">' . $playlist[4] . '</td>';
     echo '<td style="border: 1px solid #cccccc; padding: 8px;">';
     if ($playlist[3] == '1') {
