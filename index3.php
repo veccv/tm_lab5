@@ -1,13 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl"> <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> </head>
-<script>
-    document.cookie = "screenresolution=" + screen.width + "x" + screen.height;
-    document.cookie = "windowresolution=" + window.innerWidth + "x" + window.innerHeight;
-    document.cookie = "colors=" + screen.colorDepth;
-    document.cookie = "cookies=" + navigator.cookieEnabled;
-    document.cookie = "java=" + navigator.javaEnabled;
-    document.cookie = "lang=" + navigator.language;
-</script>
 <BODY>
 Formularz logowania
 <form method="post" action="weryfikuj3.php">

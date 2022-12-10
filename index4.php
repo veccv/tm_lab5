@@ -12,9 +12,9 @@ $user = $_SESSION['user'];
 
 $auth_file = file_get_contents('auth.txt');
 $lines = explode("\n", $auth_file);
-$host = substr($lines[0], 5, -1);
-$username = substr($lines[1], 9, -1);
-$password = substr($lines[2], 9, -1);
+$host = substr($lines[0], 5);
+$username = substr($lines[1], 9);
+$password = substr($lines[2], 9);
 $database = substr($lines[3], 7);
 $link = mysqli_connect($host, $username, $password, $database);
 
